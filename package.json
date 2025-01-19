@@ -32,5 +32,8 @@
     "@ai-sdk/provider": "^1.0.4",
     "@ai-sdk/provider-utils": "^2.1.0",
     "prettier": "^3.4.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
