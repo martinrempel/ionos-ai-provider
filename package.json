@@ -1,0 +1,32 @@
+{
+  "name": "@martinrempel/ionos-ai-provider",
+  "version": "0.0.1",
+  "description": "Vercel AI Provider for running LLMs via IONOS AI Model Hub",
+  "keywords": [
+    "ai",
+    "llm",
+    "genai",
+    "vercel-ai",
+    "ionos"
+  ],
+  "license": "MIT",
+  "author": "Martin Rempel",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "tsc --build --clean",
+    "prepublish": "npm run clean",
+    "pretest": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^18",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@ai-sdk/openai-compatible": "^0.1.0",
+    "@ai-sdk/provider": "^1.0.4",
+    "@ai-sdk/provider-utils": "^2.1.0",
+    "prettier": "^3.4.2"
+  }
+}
