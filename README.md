@@ -7,7 +7,7 @@ The IONOS AI Model Hub Provider for the [AI SDK](https://sdk.vercel.ai/docs) con
 The IONOS AI Model Hub Provider is available in the `@martinrempel/ionos-ai-provider` module. You can install it with
 
 ```bash
-npm i @@martinrempel/ionos-ai-provider
+npm i @martinrempel/ionos-ai-provider
 ```
 
 ## Provider Instance
