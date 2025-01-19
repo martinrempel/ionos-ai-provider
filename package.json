@@ -12,13 +12,17 @@
   "license": "MIT",
   "author": "Martin Rempel",
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "clean": "tsc --build --clean",
     "prepublish": "npm run clean",
     "pretest": "npm run build"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "devDependencies": {
     "@types/node": "^18",
     "typescript": "^5.7.3"
