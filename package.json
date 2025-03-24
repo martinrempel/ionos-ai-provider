@@ -1,6 +1,6 @@
 {
   "name": "@martinrempel/ionos-ai-provider",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Vercel AI Provider for running LLMs via IONOS AI Model Hub",
   "keywords": [
     "ai",

@@ -1,8 +1,18 @@
-import { FetchFunction, loadApiKey, withoutTrailingSlash } from "@ai-sdk/provider-utils";
+import {
+  FetchFunction,
+  loadApiKey,
+  withoutTrailingSlash,
+} from "@ai-sdk/provider-utils";
 import { IonosChatModelId, IonosChatSettings } from "./ionos-chat-settings.js";
 import { EmbeddingModelV1, LanguageModelV1 } from "@ai-sdk/provider";
-import { IonosEmbeddingModelId, IonosEmbeddingSettings } from "./ionos-embedding-settings.js";
-import { OpenAICompatibleChatLanguageModel, OpenAICompatibleEmbeddingModel } from "@ai-sdk/openai-compatible";
+import {
+  IonosEmbeddingModelId,
+  IonosEmbeddingSettings,
+} from "./ionos-embedding-settings.js";
+import {
+  OpenAICompatibleChatLanguageModel,
+  OpenAICompatibleEmbeddingModel,
+} from "@ai-sdk/openai-compatible";
 
 export interface IonosProviderSettings {
   /**
@@ -32,17 +42,14 @@ export interface IonosProvider {
   /**
 Creates a model for text generation.
 */
-  (
-    modelId: IonosChatModelId,
-    settings?: IonosChatSettings,
-  ): LanguageModelV1;
+  (modelId: IonosChatModelId, settings?: IonosChatSettings): LanguageModelV1;
 
   /**
 Creates a chat model for text generation.
 */
   chatModel(
     modelId: IonosChatModelId,
-    settings?: IonosChatSettings,
+    settings?: IonosChatSettings
   ): LanguageModelV1;
 
   /**
@@ -50,21 +57,21 @@ Creates a text embedding model for text generation.
 */
   textEmbeddingModel(
     modelId: IonosEmbeddingModelId,
-    settings?: IonosEmbeddingSettings,
+    settings?: IonosEmbeddingSettings
   ): EmbeddingModelV1<string>;
 }
 
 export function createIonos(
-  options: IonosProviderSettings = {},
+  options: IonosProviderSettings = {}
 ): IonosProvider {
   const baseURL = withoutTrailingSlash(
-    options.baseURL ?? 'https://openai.inference.de-txl.ionos.com/v1',
+    options.baseURL ?? "https://openai.inference.de-txl.ionos.com/v1"
   );
   const getHeaders = () => ({
     Authorization: `Bearer ${loadApiKey({
       apiKey: options.apiKey,
-      environmentVariableName: 'IONOS_API_KEY',
-      description: 'IONOS AI Model Hub API key',
+      environmentVariableName: "IONOS_API_KEY",
+      description: "IONOS AI Model Hub API key",
     })}`,
     ...options.headers,
   });
@@ -91,28 +98,26 @@ export function createIonos(
 
   const createChatModel = (
     modelId: IonosChatModelId,
-    settings: IonosChatSettings = {},
+    settings: IonosChatSettings = {}
   ) => {
     return new OpenAICompatibleChatLanguageModel(modelId, settings, {
-      ...getCommonModelConfig('chat'),
-      defaultObjectGenerationMode: 'tool',
+      ...getCommonModelConfig("chat"),
+      defaultObjectGenerationMode: "tool",
     });
   };
 
   const createTextEmbeddingModel = (
     modelId: IonosEmbeddingModelId,
-    settings: IonosEmbeddingSettings = {},
+    settings: IonosEmbeddingSettings = {}
   ) =>
     new OpenAICompatibleEmbeddingModel(
       modelId,
       settings,
-      getCommonModelConfig('embedding'),
+      getCommonModelConfig("embedding")
     );
 
-  const provider = (
-    modelId: IonosChatModelId,
-    settings?: IonosChatSettings,
-  ) => createChatModel(modelId, settings);
+  const provider = (modelId: IonosChatModelId, settings?: IonosChatSettings) =>
+    createChatModel(modelId, settings);
 
   // provider.completionModel = createCompletionModel;
   provider.chatModel = createChatModel;
